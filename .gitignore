@@ -1,0 +1,8 @@
+build
+composer.lock
+docs
+vendor
+storage/repos/current
+storage/repos/previous
+.env
+.idea

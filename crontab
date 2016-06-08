@@ -1,0 +1,2 @@
+*/5 * * * * cd /var/www/html; /usr/local/bin/php entrypoint.php
+# An empty line is required at the end of this file for a valid cron file.

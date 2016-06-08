@@ -1,7 +1,7 @@
 {
     "name": "realpage/marker",
     "type": "library",
-    "description": "Automate pull requests to update due to upstream container changes",
+    "description": "Automate keeping track of upstream Dockerfile updates",
     "keywords": [
         "realpage",
         "marker"

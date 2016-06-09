@@ -67,7 +67,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
 
     public function testPullIntoLocalRepositoryPath()
     {
-        $pullRepository = 'git -C ' . $this->rootLocation . DIRECTORY_SEPARATOR . $this->repo . ' pull origin master';
+        $pullRepository = 'git -C ' . $this->rootLocation . DIRECTORY_SEPARATOR . $this->repo . ' pull';
         $location       = $this->rootLocation . DIRECTORY_SEPARATOR . $this->repo;
         $process        = $this->getMockBuilder(Process::class)->setConstructorArgs([''])->getMock();
         $process->expects($this->once())->method('setCommandLine')->with($pullRepository);
@@ -83,7 +83,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function testFailedPullIntoLocalRepositoryPath()
     {
-        $pullRepository = 'git -C ' . $this->rootLocation . DIRECTORY_SEPARATOR . $this->repo . ' pull origin master';
+        $pullRepository = 'git -C ' . $this->rootLocation . DIRECTORY_SEPARATOR . $this->repo . ' pull';
         $location       = $this->rootLocation . DIRECTORY_SEPARATOR . $this->repo;
         $process        = $this->getMockBuilder(Process::class)->setConstructorArgs([''])->getMock();
         $process->expects($this->once())->method('setCommandLine')->with($pullRepository);

@@ -7,22 +7,48 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+Marker is a notification application that will submit issues to your existing Github repos when upstream changes have been made. We use it to tell when there has been an update to Dockerfiles upstream, but you can really use it for any upstream file you want to track!
 
 ## Install
+
+*Currently, you need to pull down this repo to build a fresh container for every deploy. That will be updated on the next release.*
 
 Via Composer
 
 ``` bash
 $ composer require realpage/marker
+$ vim config/marker.php
+$ docker build -t yournamespace/marker .
+$ docker run -e GITHUB_USERNAME=aUsername -e GITHUB_TOKEN=anAccessToken yournamespace/marker
 ```
+
+*Future installs will use a yaml config file to remove the need for pulling this repo.*
 
 ## Usage
 
+Here's a quick summary of what you will need to update in the `marker.php` config file. *Again, this will be updated to yaml and mounted to the container in the future.*
+
 ``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+<?php
+
+return [
+    'github_username' => env('GITHUB_USERNAME', ''),
+    'github_token'    => env('GITHUB_TOKEN', ''),
+    'root_location'   => 'storage/repos',
+    'images'          => [
+        'nginx'      => [
+            'parent_repository' => 'docker-library/official-images',    # Upstream repo to watch
+            'location'          => 'library/nginx',                     # Location of the file to watch
+            'repository'        => 'realpage/nginx',                    # Repository to submit an issue
+        ],
+        'php'        => [
+            'parent_repository' => 'docker-library/official-images',
+            'location'          => 'library/php',
+            'repository'        => 'realpage/php',
+        ],
+    ],
+];
+
 ```
 
 ## Change log
